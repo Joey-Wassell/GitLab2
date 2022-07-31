@@ -1,0 +1,9 @@
+-classpath 'C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\build\\classes\\java\\main;C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\build\\resources\\main'
+-d 'C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\build\\docs\\javadoc'
+-doctitle 'gaps-basic-Joey-Wassell API'
+-notimestamp 
+-quiet 
+-windowtitle 'gaps-basic-Joey-Wassell API'
+'C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\src\\main\\java\\edu\\odu\\cs\\Highway.java'
+'C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\src\\main\\java\\edu\\odu\\cs\\Interval.java'
+'C:\\Users\\gamer\\git\\CS350GitClass\\gaps-basic-Joey-Wassell\\src\\main\\java\\edu\\odu\\cs\\Ranges.java'

@@ -1,7 +1,9 @@
 plugins {
 	id 'java'
 	id 'eclipse'
+	id 'org.xbib.gradle.plugin.git' version '2.0.0'
 }
+
 
 java {
     sourceCompatibility = JavaVersion.toVersion(11)
@@ -9,7 +11,7 @@ java {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -31,4 +33,38 @@ test {
     ignoreFailures = true
     useJUnitPlatform()
     
+}
+
+
+
+task reports (dependsOn:  ['test', 'Javadoc']) {
+ 
+}
+
+task deployReports (dependsOn: 'reports') {
+    group = "Reporting"
+    description 'Copies reports to the gh-pages branch for a future push to github'
+    doLast {
+        def pagesDir = "$buildDir/reports"
+        def reportgit = git.open {
+            dir = pagesDir + "./git"
+        }
+        reportgit.add (update: false, patterns: ['reports/'])
+        reportgit.add (update: true, patterns: ['reports/'])
+        reportgit.commit {
+            message = "Updating web pages"
+        }
+
+	  def pagesDocs = "$buildDir/docs"
+	  def docgit = git.open {
+		dir = pagesDocs
+	  }
+	  docgit.add (update: false, patterns: ['reports/'])
+        docgit.add (update: true, patterns: ['reports/'])
+        docgit.commit {
+            message = "Updating web pages"
+        }
+        
+        
+    }
 }
