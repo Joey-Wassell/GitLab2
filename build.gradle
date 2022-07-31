@@ -35,9 +35,11 @@ test {
     
 }
 
+javadoc  {
+    source = sourceSets.main.allJava
+}
 
-
-task reports (dependsOn:  ['test', 'Javadoc']) {
+task reports (dependsOn:  ['test', 'javadoc']) {
  
 }
 
@@ -47,7 +49,7 @@ task deployReports (dependsOn: 'reports') {
     doLast {
         def pagesDir = "$buildDir/reports"
         def reportgit = git.open {
-            dir = pagesDir + "./git"
+            dir = pagesDir
         }
         reportgit.add (update: false, patterns: ['reports/'])
         reportgit.add (update: true, patterns: ['reports/'])
@@ -59,12 +61,14 @@ task deployReports (dependsOn: 'reports') {
 	  def docgit = git.open {
 		dir = pagesDocs
 	  }
-	  docgit.add (update: false, patterns: ['reports/'])
-        docgit.add (update: true, patterns: ['reports/'])
+	  docgit.add (update: false, patterns: ['doc/'])
+        docgit.add (update: true, patterns: ['doc/'])
         docgit.commit {
             message = "Updating web pages"
         }
-        
-        
+	reportgit.push {}
+	reportgit.close()
+	docgit.push {}
+	reportgit.close()        
     }
 }
